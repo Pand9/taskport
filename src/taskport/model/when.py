@@ -11,3 +11,10 @@ class When:
 
     def as_cron(self):
         return self.raw
+
+    def as_db_value(self):
+        return self.raw
+
+    @classmethod
+    def from_db_value(cls, v) -> 'When':
+        return cls(v)
