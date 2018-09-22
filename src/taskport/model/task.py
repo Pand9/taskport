@@ -44,8 +44,8 @@ class Task:
     when: When = When.daily()
 
     def as_cron(self) -> str:
-        suffix = "# taskport name: %s, tags: %s" % (self.name, self.tags)
-        return "%s %s %s" % (self.when.as_cron(), self.cmd, suffix)
+        cmd = f"{self.cmd}; echo 'taskport name: {self.name}, tags: {self.tags}'"
+        return f'{self.when.as_cron()} /bin/bash -c "{cmd}"'
 
     def as_db_object(self) -> Dict[str, str]:
         return dict(
